@@ -2,8 +2,29 @@
 	based on a given key */
 
 
-const convert = () => {
+const convert = (objArr,obj) => {
 	// Write your code here
+	var objResult = {};
+
+	if(objArr!=null && obj!=null && objArr instanceof Array)
+	{
+		for(var objVal in objArr)
+		{
+			var objTemp = objArr[objVal];
+
+			var objKeys = Object.keys(objTemp);
+
+			var objIndex = objKeys.indexOf(obj);
+
+			var objResultIndex = objTemp[objKeys[objIndex]];
+
+			objResult[objResultIndex] = objTemp;
+		}
+	
+		return objResult;
+	}
+
+	return null;
 };
 
 /* For example,

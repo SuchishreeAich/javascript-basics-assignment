@@ -5,3 +5,43 @@
 
 // Write your code here
 
+const retrieve = (objArr,name) => {    
+
+    var fruitObj = fetch(objArr,name);
+
+    return fruitObj;
+
+};
+
+function add(objArr,obj)
+{
+    objArr.push(obj);
+}
+
+function fetch(objArr,obj)
+{
+    var objResult = {};
+
+	if(objArr!=null && obj!=null && objArr instanceof Array)
+	{
+		for(var objVal in objArr)
+		{
+			var objTemp = objArr[objVal];
+
+			var objKeys = Object.keys(objTemp);
+
+			var objIndex = objKeys.indexOf(obj);
+
+			var objResultIndex = objTemp[objKeys[objIndex]];
+
+			objResult[objResultIndex] = objTemp;
+		}
+	
+		return objResult;
+	}
+
+	return null;
+}
+
+
+module.exports = retrieve;
