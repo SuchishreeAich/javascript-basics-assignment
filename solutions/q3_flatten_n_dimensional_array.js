@@ -1,44 +1,45 @@
 /* Write a Program to Flatten a given n-dimensional array */
 
-const flatten = (objArr) => {
-	// Write your code here
-	var objResultArray = [];
-	
-	for(var obj in objArr)
-	{		
-		pushToArray(objArr[obj],objResultArray);		
-	}
-		
-	return objResultArray;
-};
-
-function pushToArray(objVal,objResultArray)
-{	
-	var arrFlag = objVal instanceof Array;
-	
+function pushToArray(objVal, objResultArray)
+{
+	let arrFlag = objVal instanceof Array;
 	if(!arrFlag)
 	{
-		objResultArray.push(objVal);		
+		objResultArray.push(objVal);
 	}
 	else
-	{	
-		for(var objArrVal in objVal)
+	{
+		for(let objArrVal in objVal)
 		{
-			var objNewVal = objVal[objArrVal];
+			if(objVal.hasOwnProperty(objArrVal))
+			{
+				let objNewVal = objVal[objArrVal];
 
-			if(objNewVal instanceof Array)
-			{
-				pushToArray(objNewVal,objResultArray);
-			}
-			else
-			{
-				objResultArray.push(objNewVal);
+				pushToArray(objNewVal, objResultArray);
 			}
 		}
 	}
-	
 	return objResultArray;
 }
+
+const flatten = (objArr) => {
+	// Write your code here
+	let objResultArray = [];
+
+	if(objArr !== null && objArr instanceof Array)
+	{
+		for(let obj in objArr)
+		{
+			if(objArr.hasOwnProperty(obj))
+			{
+				pushToArray(objArr[obj], objResultArray);
+			}
+		}
+		return objResultArray;
+	}
+	return null;
+};
+
 
 /* For example,
 INPUT - flatten([1, [2, 3], [[4], [5]])

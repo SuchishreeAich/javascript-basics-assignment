@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DOM Manipulation</title> 
+</head>
+<body onload="generateTable();"> 
+        
+    <script type="text/javascript">
+        function generateTable()
+        {      
+            var tbl = document.createElement("table");
+            var tblHead = document.createElement("thead");
+            var tblBody = document.createElement("tbody");
+
+            //  TABLE HEADER
+            generateTableHeader(tblHead);
+
+            //  TABLE BODY
+            generateTableBody(tblBody);
+
+            // BUTTON
+            generateButton(tblBody);
+
+            tbl.appendChild(tblHead);
+
+            tbl.appendChild(tblBody);
+
+            document.body.appendChild(tbl);
+
+            tbl.setAttribute("border", "1");
+        }
+        
+        function generateTableHeader(tblHead)
+        {
+            var tblDataTextNode;
+
+            for(let i = 0; i < 1 ; i = i + 1)
+            {
+                let tblRow = document.createElement("tr");
+                
+                for(let j = 0; j <= 7; j = j + 1)
+                {
+                    let tblData = document.createElement("td");
+
+                    switch( parseInt(j) )
+                    {
+                        case 0:
+                            tblDataTextNode = document.createTextNode("Student Id");
+                            tblData.appendChild(tblDataTextNode);
+                            break;
+                        case 1:
+                            tblDataTextNode = document.createTextNode("Student Name");
+                            tblData.appendChild(tblDataTextNode);
+                            break;
+                        case 2:
+                            tblDataTextNode = document.createTextNode("1st Subject");
+                            tblData.appendChild(tblDataTextNode);
+                            break;
+                        case 3:
+                            tblDataTextNode = document.createTextNode("2nd Subject");
+                            tblData.appendChild(tblDataTextNode);
+                            break;
+                        case 4:
+                            tblDataTextNode = document.createTextNode("1st Subject Score");
+                            tblData.appendChild(tblDataTextNode);
+                            break;
+                        case 5:
+                            blDataTextNode = document.createTextNode("2nd Subject Score");
+                            tblData.appendChild(tblDataTextNode);
+                            break;
+                        case 6:
+                            tblDataTextNode = document.createTextNode("Total Score");
+                            tblData.appendChild(tblDataTextNode);
+                            break;
+                        case 7:
+                            tblDataTextNode = document.createTextNode("Average Score");
+                            tblData.appendChild(tblDataTextNode);
+                            break;
+                        default:
+                            break;
+                    }
+
+                    //tblData.appendChild(tblDataTextNode);
+
+                    tblRow.appendChild(tblData);
+                }
+
+                tblHead.appendChild(tblRow);    
+            }
+        }
+
+        function generateTableBody(tblBody)
+        {
+            var tblDataTextNode;
+            for(let i = 0; i <= 9; i = i + 1)
+            {
+                let tblRow = document.createElement("tr");
+                
+                for(let j = 0; j <= 7; j = j + 1)
+                {
+                    let tblData = document.createElement("td");
+                
+                    switch( parseInt(j, 0) )
+                    {
+                        case 0:
+                            tblDataTextNode = document.createTextNode("Student Id " + parseInt(i, 0));   
+                            tblData.appendChild(tblDataTextNode);
+                            tblData.setAttribute("id", "Student" + parseInt(i, 0));                        
+                            break;
+                        case 1:
+                            tblDataTextNode = document.createTextNode("Student Name " + parseInt(i, 0));
+                            tblData.appendChild(tblDataTextNode);
+                            tblData.setAttribute("id", "StudentName" + parseInt(i, 0));
+                            break;
+                        case 2:
+                            if(i%2===0)
+                            {
+                                tblDataTextNode = document.createTextNode("Grammar");
+                                tblData.appendChild(tblDataTextNode);
+                            }
+                            else
+                            {
+                                tblDataTextNode = document.createTextNode("Accounts");
+                                tblData.appendChild(tblDataTextNode);                             
+                            }
+                            tblData.setAttribute("id", "Student" + parseInt(i, 0) +
+                                "Subject1");
+                            break;
+                        case 3:
+                            tblDataTextNode = document.createTextNode("Physics");
+                            tblData.appendChild(tblDataTextNode);
+                            tblData.setAttribute("id", "Student" + parseInt(i, 0) +
+                                "Subject2");
+                            break;
+                        case 4:
+                            tblDataTextNode = document.createTextNode(parseInt(50));
+                            tblData.appendChild(tblDataTextNode);
+                            tblData.setAttribute("id", "Student" + parseInt(i, 0)
+                                + "Subject1Score");
+                            break;
+                        case 5:
+                            tblDataTextNode = document.createTextNode(parseInt(45));
+                            tblData.appendChild(tblDataTextNode);
+                            tblData.setAttribute("id", "Student" + parseInt(i, 0)
+                                + "Subject2Score");
+                            break;
+                        case 6:
+                            tblDataTextNode = document.createTextNode("");
+                            tblData.appendChild(tblDataTextNode);
+                            tblData.setAttribute("id", "Student"+ parseInt(i, 0) 
+                                + "TotalScore");
+                            break;
+                        case 7:
+                            tblDataTextNode = document.createTextNode("");
+                            tblData.appendChild(tblDataTextNode);
+                            tblData.setAttribute("id", "Student"+ parseInt(i, 0) 
+                                + "AverageScore");
+                            break;
+                        default:
+                            break;
+                    }
+
+                    tblRow.appendChild(tblData);
+                }
+
+                tblBody.appendChild(tblRow); 
+            }
+        }
+
+        function generateButton(tblBody)
+        {
+            for(var i=0;i<1;i++)
+            {
+                var tblRow = document.createElement("tr");
+
+                var tblData = document.createElement("td");
+
+                var tblButton = document.createElement("button");
+
+                var tblButtonText = document.createTextNode("Calculate");
+
+                tblButton.appendChild(tblButtonText);
+
+                tblButton.setAttribute("onClick","calculateValues()");
+
+                tblData.appendChild(tblButton);
+
+                tblRow.appendChild(tblData);
+
+                tblBody.appendChild(tblRow);
+            }
+        }
+    </script>
+    
+    <script type="text/javascript" src="q5_students_result_card.js"/>         
+    
+</body>
+</html>

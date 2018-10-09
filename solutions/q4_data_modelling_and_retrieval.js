@@ -2,46 +2,64 @@
 // and convert it into a format so that for a given fruit name
 // retrieval of its color and pricePerKg value is fast
 
-
-// Write your code here
-
-const retrieve = (objArr,name) => {    
-
-    var fruitObj = fetch(objArr,name);
-
-    return fruitObj;
-
-};
-
-function add(objArr,obj)
+function fetch(objArr, obj)
 {
-    objArr.push(obj);
-}
+    let objResult = {};
 
-function fetch(objArr,obj)
-{
-    var objResult = {};
-
-	if(objArr!=null && obj!=null && objArr instanceof Array)
+	if(objArr !== null && obj !== null && objArr instanceof Array)
 	{
-		for(var objVal in objArr)
+		for(let objVal in objArr)
 		{
-			var objTemp = objArr[objVal];
+			if(objArr.hasOwnProperty(objVal))
+			{
+				let objTemp = objArr[objVal];
 
-			var objKeys = Object.keys(objTemp);
+				let objKeys = Object.keys(objTemp);
 
-			var objIndex = objKeys.indexOf(obj);
+				let objIndex = objKeys.indexOf(obj);
 
-			var objResultIndex = objTemp[objKeys[objIndex]];
+				let objResultIndex = objTemp[objKeys[objIndex]];
 
-			objResult[objResultIndex] = objTemp;
+				objResult[objResultIndex] = objTemp;
+			}
 		}
-	
+
 		return objResult;
 	}
 
 	return null;
 }
+
+function add(objArr, obj)
+{
+	objArr.push(obj);
+
+	return objArr;
+}
+
+function update(objArr)
+{
+	let fruit = objArr[2];
+
+	fruit.pricePerKg = 500;
+
+	objArr.push(fruit);
+
+	return objArr;
+}
+
+const retrieve = (objArr, name) => {
+	// Write your code here
+	let fruitNew = {name: 'Grapes', color: 'Green', pricePerKg: 300};
+
+	add(objArr, fruitNew);
+
+	update(objArr);
+
+    let fruitObj = fetch(objArr, name);
+
+    return fruitObj;
+};
 
 
 module.exports = retrieve;
